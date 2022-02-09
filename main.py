@@ -9,6 +9,7 @@ professions = "".join([f"""<div class="form-check">
                                           <input class="form-check-input" type="checkbox" value="" id="{i}">
                                           <label class="form-check-label" for="{i}">{i}</label>
                                           </div>""" for i in prof.split(",")])
+professions_request = []
 
 
 @app.route("/")
@@ -161,13 +162,15 @@ def astronaut_selection():
                               </body>
                             </html>'''
     elif request.method == 'POST':
+        print(request.form['name'])
+        print(request.form['surname'])
         print(request.form['email'])
-        print(request.form['password'])
-        print(request.form['class'])
-        print(request.form['file'])
-        print(request.form['about'])
-        print(request.form['accept'])
+        print(request.form['Obr'])
+        map(lambda x: print(request.form[x]), professions)
         print(request.form['sex'])
+        print(request.form['about'])
+        print(request.form['file'])
+        print(request.form['accept'])
         return "Форма отправлена"
 
 
