@@ -23,6 +23,7 @@ def main_menu():
         <li><a href="http:\\image_mars">Image of mars</a> 
         <li><a href="http:\\promotion_image">Promotion with image</a> 
         <li><a href="http:\\astronaut_selection">Astronaut selection</a> 
+        <li><a href="http:\\choice\\Марс">Choice</a> 
         </ol>
         '''
 
@@ -172,6 +173,29 @@ def astronaut_selection():
         print(request.form['file'])
         print(request.form['accept'])
         return "Форма отправлена"
+
+
+@app.route("/choice/<name>")
+def choice(name):
+    return f"""
+            <!DOCTYPE html>
+            <html lang="ru">
+            <head>
+                <meta charset="UTF-8">
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+                integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+                crossorigin="anonymous">
+                <title>Привет, {name.capitalize()}!</title>
+            </head>
+            <body>
+                <h1>Жди нас, {name.capitalize()}!</h1>
+                <div class="alert alert-light" role="alert">Мое предложение: {name.capitalize()}</div>
+                <div class="alert alert-info" role="alert">
+                На этой планете много необходимых ресурсов;<br>
+                На ней есть небольшое магнитное поле;<br>
+                Наконец, она просто красива!<br></div>
+            </body>
+            """
 
 
 if __name__ == '__main__':
