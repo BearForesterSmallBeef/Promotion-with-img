@@ -76,11 +76,11 @@ def promotion_image():
             <img src={url_for('static', filename='/img/Mars.jpg')} alt="Марс сломался :(" align="middle" 
             height=350 width=500>
             <div class="alert alert-light" role="alert">Вот она какая, красная планета</div>
-            <div class="alert alert-info" role="alert">Человечество вырастает из детства.<br>
-            Человечеству мала одна планета.<br>
-            Мы сделаем обитаемыми безжизненные пока планеты.<br>
-            И начнем с Марса!<br>
-            Присоединяйся!</div>
+            <div class="alert alert-secondary" role="alert">Человечество вырастает из детства.</div>
+            <div class="alert alert-success" role="alert">Человечеству мала одна планета.</div>
+            <div class="alert alert-secondary" role="alert">Мы сделаем обитаемыми безжизненные пока планеты.</div>
+            <div class="alert alert-warning" role="alert">И начнем с Марса!</div>
+            <div class="alert alert-danger" role="alert">Присоединяйся!</div>
         </body>
         </html>
         '''
