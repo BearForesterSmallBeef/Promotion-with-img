@@ -79,7 +79,7 @@ def main_menu():
         <li><a href="http:\\promotion_image">Promotion with image</a> 
         <li><a href="http:\\astronaut_selection">Astronaut selection</a> 
         <li><a href="http:\\choice\\Марс">Choice</a> 
-        <li><a href="http:\\results\\_\\0\\0">Results</a> 
+        <li><a href="http:\\results\\_\\0\\0.0">Results</a> 
         </ol>
         '''
 
@@ -263,6 +263,7 @@ def choice(name):
 
 @app.route("/results/<nickname>/<int:level>/<float:rating>")
 def results(nickname, level, rating):
+    print(0)
     return \
         f"""
         <!DOCTYPE html>
@@ -285,5 +286,7 @@ def results(nickname, level, rating):
         </body>
         </html>
         """
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
