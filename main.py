@@ -79,6 +79,7 @@ def main_menu():
         <li><a href="http:\\promotion_image">Promotion with image</a> 
         <li><a href="http:\\astronaut_selection">Astronaut selection</a> 
         <li><a href="http:\\choice\\Марс">Choice</a> 
+        <li><a href="http:\\results\\_\\0\\0">Results</a> 
         </ol>
         '''
 
@@ -260,5 +261,29 @@ def choice(name):
             """
 
 
+@app.route("/results/<nickname>/<int:level>/<float:rating>")
+def results(nickname, level, rating):
+    return \
+        f"""
+        <!DOCTYPE html>
+        <html lang="ru">
+        <head>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" type="text/css" href="{url_for('static', filename='/css/style.css')}">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+            crossorigin="anonymous">
+            <link rel="stylesheet">
+            <title>Результат</title>
+        </head>
+        <body>
+            <h1>Результат отбора</h1>
+            <h3>Претендента на участие в миссии {nickname}</h3>
+            <div class="alert alert-success" role="alert">Поздравляем! Ваш рейтинг после {level} этапа отбора</div>
+            <div class="alert alert-light" role="alert">составляет {rating}!</div>
+            <div class="alert alert-warning" role="alert">Желаем удачи!</div>
+        </body>
+        </html>
+        """
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
