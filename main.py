@@ -9,7 +9,62 @@ professions = "".join([f"""<div class="form-check">
                                           <input class="form-check-input" type="checkbox" value="" id="{i}" name="pro">
                                           <label class="form-check-label" for="{i}">{i}</label>
                                           </div>""" for i in prof.split(",")])
-professions_request = []
+planets = {"Меркурий": """<div class="alert alert-light" role="alert">Ближайшая к Солнцу планета</div>
+                          <div class="alert alert-success" role="alert">Её период обращения вокруг Солнца составляет всего 87,97 земных суток</div>
+                          <div class="alert alert-secondary" role="alert">Ось Меркурия имеет наименьший наклон из всех планет Солнечной системы</div>
+                          <div class="alert alert-warning" role="alert">Отсутствие внутренней геологической активности в последние миллиарды лет</div>
+                          <div class="alert alert-danger" role="alert">Известных природных спутников у планеты нет</div>
+                       """,
+           "Венера": """<div class="alert alert-light" role="alert">Вторая по удалённости от Солнца планета</div>
+                          <div class="alert alert-success" role="alert">Шестая по размеру планета</div>
+                          <div class="alert alert-secondary" role="alert">Названа в честь древнеримской богини любви Венеры</div>
+                          <div class="alert alert-warning" role="alert">Венерианский год составляет 224,7 земных суток</div>
+                          <div class="alert alert-danger" role="alert">Она имеет самый длинный период вращения вокруг своей оси среди всех планет Солнечной системы и<br> вращается в направлении, противоположном направлению вращения большинства планет.</div>
+                       """,
+           "Земля": """<div class="alert alert-light" role="alert">Третья по удалённости от Солнца планета</div>
+                          <div class="alert alert-success" role="alert">Самая плотная планета</div>
+                          <div class="alert alert-secondary" role="alert">Пятая по диаметру и массе среди всех планет</div>
+                          <div class="alert alert-warning" role="alert">Крупнейшая среди планет земной группы</div>
+                          <div class="alert alert-danger" role="alert">Есть биосфера и мы здесь живем!</div>
+                       """,
+           "Марс": """<div class="alert alert-light" role="alert">Четвертая по удалённости от Солнца планета</div>
+                          <div class="alert alert-success" role="alert">седьмая по размеру планета</div>
+                          <div class="alert alert-secondary" role="alert">Названа в честь Марса — древнеримского бога войны</div>
+                          <div class="alert alert-warning" role="alert">есть два естественных спутника</div>
+                          <div class="alert alert-danger" role="alert">есть вулканы, долины, пустыни</div>
+                       """,
+           "Юпитер": """<div class="alert alert-light" role="alert">крупнейшая планета Солнечной системы</div>
+                          <div class="alert alert-success" role="alert">пятая по удалённости от Солнца</div>
+                          <div class="alert alert-secondary" role="alert">Юпитер классифицируется как газовый гигант</div>
+                          <div class="alert alert-warning" role="alert">Юпитер имеет, по крайней мере, 80 спутников</div>
+                          <div class="alert alert-danger" role="alert">название Юпитера происходит от имени древнеримского верховного бога-громовержца</div>
+                       """,
+           "Плутон": """<div class="alert alert-light" role="alert">крупнейшая известная карликовая планета Солнечной системы</div>
+                          <div class="alert alert-success" role="alert">состоит в основном из камня и льда</div>
+                          <div class="alert alert-secondary" role="alert">его масса меньше массы Луны примерно в шесть раз</div>
+                          <div class="alert alert-warning" role="alert">Плутон считался девятой планетой Солнечной системы</div>
+                          <div class="alert alert-danger" role="alert">В честь Плутона был назван химический элемент плутоний</div>
+                       """,
+           "Сатурн": """<div class="alert alert-light" role="alert">шестая планета по удалённости от Солнца</div>
+                          <div class="alert alert-success" role="alert">вторая по размерам планета</div>
+                          <div class="alert alert-secondary" role="alert">классифицируется как газовый планета-гигант</div>
+                          <div class="alert alert-warning" role="alert">Сатурн назван в честь римского бога земледелия</div>
+                          <div class="alert alert-danger" role="alert">В основном Сатурн состоит из водорода</div>
+                       """,
+           "Уран": """<div class="alert alert-light" role="alert">седьмая планета по удалённости от Солнца</div>
+                          <div class="alert alert-success" role="alert">третья по диаметру и четвёртая по массе</div>
+                          <div class="alert alert-secondary" role="alert">названа в честь греческого бога неба Урана</div>
+                          <div class="alert alert-warning" role="alert">Уран стал первой планетой, обнаруженной в Новое время и при помощи телескопа</div>
+                          <div class="alert alert-danger" role="alert">В отличие от газовых гигантов — Сатурна и Юпитера, состоящих в основном из водорода<br>
+                                                                        и гелия, в недрах Урана и схожего с ним Нептуна отсутствует металлический водород, <br>
+                                                                        но зато много льда в его высокотемпературных модификациях.</div>
+                       """,
+           "Нептун": """<div class="alert alert-light" role="alert">восьмая и самая дальняя от Солнца планета</div>
+                          <div class="alert alert-success" role="alert">Его масса превышает массу Земли в 17,2 раза и является третьей среди планет Солнечной системы</div>
+                          <div class="alert alert-secondary" role="alert">Планета названа в честь Нептуна — римского бога морей</div>
+                          <div class="alert alert-warning" role="alert">Нептун стал первой планетой, открытой благодаря математическим расчётам</div>
+                          <div class="alert alert-danger" role="alert">Нептун по составу близок к Урану, и обе планеты отличаются от более крупных планет-гигантов — Юпитера и Сатурна</div>
+                       """}
 
 
 @app.route("/")
@@ -199,12 +254,8 @@ def choice(name):
                 <title>Привет, {name.capitalize()}!</title>
             </head>
             <body>
-                <h1>Жди нас, {name.capitalize()}!</h1>
-                <div class="alert alert-light" role="alert">Мое предложение: {name.capitalize()}</div>
-                <div class="alert alert-info" role="alert">
-                На этой планете много необходимых ресурсов;<br>
-                На ней есть небольшое магнитное поле;<br>
-                Наконец, она просто красива!<br></div>
+                <h1>Мое предложение: {name.capitalize()}</h1>
+                {planets[name.capitalize()]}
             </body>
             """
 
