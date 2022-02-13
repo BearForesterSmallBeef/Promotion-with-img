@@ -6,7 +6,7 @@ prof = "инженер-исследователь, пилот, строител�
        " астрогеолог, гляциолог, инженер жизнеобеспечения, метеоролог, оператор марсохода," \
        " киберинженер, штурман"
 professions = "".join([f"""<div class="form-check">
-                                          <input class="form-check-input" type="checkbox" value="" id="{i}">
+                                          <input class="form-check-input" type="checkbox" value="" id="{i}" name="pro">
                                           <label class="form-check-label" for="{i}">{i}</label>
                                           </div>""" for i in prof.split(",")])
 professions_request = []
@@ -86,7 +86,7 @@ def promotion_image():
         '''
 
 
-@app.route("/astronaut_selection")
+@app.route("/astronaut_selection", methods=['POST', 'GET'])
 def astronaut_selection():
     if request.method == 'GET':
         return f'''<!doctype html>
@@ -163,16 +163,27 @@ def astronaut_selection():
                               </body>
                             </html>'''
     elif request.method == 'POST':
-        print(request.form['name'])
-        print(request.form['surname'])
-        print(request.form['email'])
-        print(request.form['Obr'])
-        map(lambda x: print(request.form[x]), professions)
-        print(request.form['sex'])
-        print(request.form['about'])
-        print(request.form['file'])
-        print(request.form['accept'])
-        return "Форма отправлена"
+        print(f"name: {request.form.get('name')}")
+        print(f"surname: {request.form.get('surname')}")
+        print(f"email: {request.form.get('email')}")
+        print(f"Obr: {request.form.get('Obr')}")
+        print(f"prof: {request.form.get('pro')}")
+        print(f"sex: {request.form.get('sex')}")
+        print(f"reason: {request.form.get('reason')}")
+        print(f"file: {request.form.get('file')}")
+        print(f"accept: {request.form.get('accept')}")
+        return """
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+            integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+            crossorigin="anonymous">
+        </head>
+        <body>
+        <div class="alert alert-info" role="alert">Форма отправлена</div>
+        </body>"""
 
 
 @app.route("/choice/<name>")
